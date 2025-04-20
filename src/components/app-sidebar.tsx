@@ -52,6 +52,11 @@ const data = {
       icon: IconPalette,
     },
     {
+      title: "XC UI",
+      url: "/xc-ui",
+      icon: IconPalette,
+    },
+    {
       title: "Lifecycle",
       url: "#",
       icon: IconListDetails,
