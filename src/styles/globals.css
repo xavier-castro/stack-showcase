@@ -123,3 +123,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+.gradient-1 {
+  background: linear-gradient(to right, var(--chart-1), var(--chart-2));
+}
+
+

@@ -79,12 +79,14 @@ export function AnalyticsCard({
   }
 
   // Create a custom chart color based on change direction
+  // Use accentColor if provided, otherwise determine based on trend
   const chartColor =
-    (accentColor ?? derivedDirection === "up")
+    accentColor ??
+    (derivedDirection === "up"
       ? "var(--chart-1)"
       : derivedDirection === "down"
         ? "var(--destructive)"
-        : "var(--muted-foreground)";
+        : "var(--muted-foreground)");
 
   return (
     <Card
@@ -212,11 +214,16 @@ export function AnalyticsCard({
                           <p className="text-xs">
                             {new Date(
                               // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-                              payload[0].payload.date,
+                              payload[0]?.payload?.date ?? "",
                             ).toLocaleDateString()}
                           </p>
                           <p className="text-sm font-medium">
-                            {formatter(payload[0].value)}
+                            {/* Handle potential array value from recharts payload */}
+                            {formatter(
+                              Array.isArray(payload[0]?.value)
+                                ? (payload[0]?.value[0] ?? 0)
+                                : (payload[0]?.value ?? 0),
+                            )}
                           </p>
                         </div>
                       );
@@ -229,7 +236,7 @@ export function AnalyticsCard({
                   dataKey="value"
                   stroke={chartColor}
                   strokeWidth={2}
-                  fillOpacity={1}
+                  fillOpacity={0.1}
                   fill={`url(#colorGradient-${title})`}
                 />
               </AreaChart>
@@ -237,11 +244,6 @@ export function AnalyticsCard({
           </div>
         )}
       </CardContent>
-      {footerText && (
-        <CardFooter className="border-t px-4 py-3">
-          <p className="text-muted-foreground text-xs">{footerText}</p>
-        </CardFooter>
-      )}
     </Card>
   );
 }
