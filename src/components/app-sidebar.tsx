@@ -33,6 +33,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "~/components/ui/sidebar";
+import Link from "next/link";
 
 const data = {
   user: {
@@ -68,11 +69,6 @@ const data = {
     },
     {
       title: "Forms",
-      url: "#",
-      icon: IconFolder,
-    },
-    {
-      title: "Form Management",
       url: "/form-management",
       icon: IconFolder,
     },
@@ -176,10 +172,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
+              <Link href="/">
                 <IconInnerShadowTop className="!size-5" />
                 <span className="text-base font-semibold">iamxavier stack</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
