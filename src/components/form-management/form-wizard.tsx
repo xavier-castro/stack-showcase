@@ -1,43 +1,36 @@
 // src/components/form-management/form-wizard.tsx
-"use client"
+"use client";
 
-import * as React from "react"
 import {
   IconCheck,
   IconChevronLeft,
   IconChevronRight,
-} from "@tabler/icons-react"
+} from "@tabler/icons-react";
+import * as React from "react";
 
-import { cn } from "~/lib/utils"
-import { Button } from "~/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card"
+import { Button } from "~/components/ui/button";
+import { CardContent, CardFooter } from "~/components/ui/card";
+import { cn } from "~/lib/utils";
 
 type Step = {
-  id: string
-  title: string
-  description?: string
-  isOptional?: boolean
-}
+  id: string;
+  title: string;
+  description?: string;
+  isOptional?: boolean;
+};
 
 type FormWizardProps = {
-  steps: Step[]
-  activeStep: number
-  onNext: () => void
-  onPrevious: () => void
-  onComplete: () => void
-  isPending?: boolean
-  isStepValid?: boolean
-  setIsStepValid?: (isValid: boolean) => void
-  className?: string
-  children: React.ReactNode
-}
+  steps: Step[];
+  activeStep: number;
+  onNext: () => void;
+  onPrevious: () => void;
+  onComplete: () => void;
+  isPending?: boolean;
+  isStepValid?: boolean;
+  setIsStepValid?: (isValid: boolean) => void;
+  className?: string;
+  children: React.ReactNode;
+};
 
 export function FormWizard({
   steps,
@@ -47,12 +40,12 @@ export function FormWizard({
   onComplete,
   isPending = false,
   isStepValid = true,
-  setIsStepValid,
+  setIsStepValid: _setIsStepValid,
   className,
   children,
-}: FormWizardProps) {
-  const isLastStep = activeStep === steps.length - 1
-  
+}: FormWizardProps): React.JSX.Element {
+  const isLastStep = activeStep === steps.length - 1;
+
   return (
     <div className={cn("w-full", className)}>
       <div className="mb-8">
@@ -62,10 +55,8 @@ export function FormWizard({
           variant="circles"
         />
       </div>
-      <CardContent className="p-0">
-        {children}
-      </CardContent>
-      <CardFooter className="flex justify-between gap-2 border-t p-4 mt-6">
+      <CardContent className="p-0">{children}</CardContent>
+      <CardFooter className="mt-6 flex justify-between gap-2 border-t p-4">
         <Button
           variant="outline"
           onClick={onPrevious}
@@ -75,7 +66,7 @@ export function FormWizard({
           Previous
         </Button>
         <div className="flex gap-2">
-          {steps[activeStep].isOptional && (
+          {steps[activeStep]?.isOptional && (
             <Button
               variant="ghost"
               onClick={isLastStep ? onComplete : onNext}
@@ -103,15 +94,15 @@ export function FormWizard({
         </div>
       </CardFooter>
     </div>
-  )
+  );
 }
 
 type StepIndicatorProps = {
-  steps: Step[]
-  activeStep: number
-  variant?: "circles" | "progress"
-  className?: string
-}
+  steps: Step[];
+  activeStep: number;
+  variant?: "circles" | "progress";
+  className?: string;
+};
 
 function StepIndicator({
   steps,
@@ -122,7 +113,7 @@ function StepIndicator({
   if (variant === "progress") {
     return (
       <div className={cn("w-full", className)}>
-        <div className="relative flex h-2 w-full overflow-hidden rounded-full bg-secondary">
+        <div className="bg-secondary relative flex h-2 w-full overflow-hidden rounded-full">
           <div
             className="bg-primary absolute inset-y-0 left-0 transition-all"
             style={{
@@ -131,20 +122,20 @@ function StepIndicator({
           />
         </div>
       </div>
-    )
+    );
   }
 
   return (
     <div
       className={cn(
         "flex w-full items-center justify-between gap-2",
-        className
+        className,
       )}
     >
       {steps.map((step, index) => {
-        const isCompleted = index < activeStep
-        const isCurrent = index === activeStep
-        const isUpcoming = index > activeStep
+        const isCompleted = index < activeStep;
+        const isCurrent = index === activeStep;
+        const isUpcoming = index > activeStep;
 
         return (
           <React.Fragment key={step.id}>
@@ -152,7 +143,7 @@ function StepIndicator({
               <div
                 className={cn(
                   "h-px flex-1 transition-colors",
-                  isCompleted ? "bg-primary" : "bg-secondary"
+                  isCompleted ? "bg-primary" : "bg-secondary",
                 )}
               />
             )}
@@ -162,10 +153,9 @@ function StepIndicator({
                   "flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm font-medium ring-4 ring-transparent transition-colors",
                   isCompleted &&
                     "border-primary bg-primary text-primary-foreground",
-                  isCurrent &&
-                    "border-primary text-primary bg-background",
+                  isCurrent && "border-primary text-primary bg-background",
                   isUpcoming &&
-                    "border-secondary text-muted-foreground bg-background"
+                    "border-secondary text-muted-foreground bg-background",
                 )}
               >
                 {isCompleted ? (
@@ -177,15 +167,15 @@ function StepIndicator({
               <span
                 className={cn(
                   "text-xs font-medium transition-colors",
-                  isCurrent ? "text-foreground" : "text-muted-foreground"
+                  isCurrent ? "text-foreground" : "text-muted-foreground",
                 )}
               >
                 {step.title}
               </span>
             </div>
           </React.Fragment>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
