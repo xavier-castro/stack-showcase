@@ -3,11 +3,12 @@
 import * as React from "react";
 import {
   IconDashboard,
-  IconFolder,
   IconInnerShadowTop,
   IconPalette,
   IconChartLine,
   IconTimeline,
+  IconFileStack,
+  IconHome,
 } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -33,24 +34,19 @@ const data = {
   },
   navMain: [
     {
-      title: "Dashboard",
-      url: "/dashboard",
-      icon: IconDashboard,
+      title: "Home",
+      url: "/",
+      icon: IconHome,
     },
     {
-      title: "Shadcn UI",
+      title: "Basic Components",
       url: "/shadcn",
-      icon: IconPalette,
-    },
-    {
-      title: "XC UI",
-      url: "/xc-ui",
       icon: IconPalette,
     },
     {
       title: "Forms",
       url: "/form-management",
-      icon: IconFolder,
+      icon: IconFileStack,
     },
     {
       title: "Analytics Demo",
@@ -65,7 +61,13 @@ const data = {
   ],
   navClouds: [],
   navSecondary: [],
-  documents: [],
+  documents: [
+    {
+      name: "Dashboard Boilerplate",
+      url: "/dashboard",
+      icon: IconDashboard,
+    },
+  ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

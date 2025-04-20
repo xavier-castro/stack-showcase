@@ -31,18 +31,8 @@ const data = {
   },
   navMain: [
     {
-      title: "Dashboard",
-      url: "/dashboard",
-      icon: IconDashboard,
-    },
-    {
-      title: "Shadcn UI",
+      title: "Basic UI",
       url: "/shadcn",
-      icon: IconPalette,
-    },
-    {
-      title: "XC UI",
-      url: "/xc-ui",
       icon: IconPalette,
     },
     {
@@ -53,7 +43,13 @@ const data = {
   ],
   navClouds: [],
   navSecondary: [],
-  documents: [],
+  documents: [
+    {
+      name: "Dashboard Boilerplate",
+      url: "/dashboard",
+      icon: IconDashboard,
+    },
+  ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

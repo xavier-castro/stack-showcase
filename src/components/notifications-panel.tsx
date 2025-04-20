@@ -268,7 +268,7 @@ function NotificationItem({
           {notification.title}
         </p>
         {notification.description && (
-          <p className="text-muted-foreground line-clamp-2 text-xs">
+          <p className="text-muted-foreground line-clamp-1 text-xs">
             {notification.description}
           </p>
         )}
