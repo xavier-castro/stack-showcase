@@ -1,7 +1,54 @@
+"use client";
+
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import { SidebarTrigger } from "~/components/ui/sidebar";
 import { ModeToggle } from "./mode-toggle";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "~/components/ui/breadcrumb";
+import { usePathname } from "next/navigation";
+import * as React from "react";
+
+function Breadcrumbs() {
+  const pathname = usePathname();
+  const segments = pathname.split("/").filter(Boolean);
+  let href = "";
+
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        {segments.map((segment, idx) => {
+          href += `/${segment}`;
+          const isLast = idx === segments.length - 1;
+          return (
+            <React.Fragment key={href}>
+              {idx > 0 && <BreadcrumbSeparator />}
+              <BreadcrumbItem>
+                {isLast ? (
+                  <BreadcrumbPage>
+                    {decodeURIComponent(segment).charAt(0).toUpperCase() +
+                      decodeURIComponent(segment).slice(1)}
+                  </BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink href={href}>
+                    {decodeURIComponent(segment).charAt(0).toUpperCase() +
+                      decodeURIComponent(segment).slice(1)}
+                  </BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+            </React.Fragment>
+          );
+        })}
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+}
 
 export function SiteHeader() {
   return (
@@ -12,7 +59,9 @@ export function SiteHeader() {
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">Documents</h1>
+        <div className="flex flex-1">
+          <Breadcrumbs />
+        </div>
         <div className="ml-auto flex items-center gap-2">
           <Button variant="ghost" asChild size="sm" className="hidden sm:flex">
             <a
@@ -25,8 +74,8 @@ export function SiteHeader() {
             </a>
           </Button>
         </div>
+        <ModeToggle />
       </div>
-      <ModeToggle />
     </header>
   );
 }
