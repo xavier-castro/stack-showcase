@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { FileUpload } from "~/components/file-upload";
+import { FileUpload } from "~/components/app/file-upload";
 import { TypographyH1 } from "~/components/typography/typography-h1";
 import { TypographyH2 } from "~/components/typography/typography-h2";
-import { AnalyticsCard } from "~/components/analytics-dashboard.card";
+import { AnalyticsCard } from "~/components/app/analytics-dashboard.card";
 import { DropdownMenuItem } from "~/components/ui/dropdown-menu";
 import {
   IconUser,

@@ -5,7 +5,7 @@ import { Geist } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { ThemeProvider } from "~/components/theme-provider";
-import { AppSidebar } from "~/components/app-sidebar";
+import { AppSidebar } from "~/components/app/app-sidebar";
 import { SiteHeader } from "~/components/site-header";
 import { SidebarProvider, SidebarInset } from "~/components/ui/sidebar";
 
