@@ -100,7 +100,7 @@ export default function FormManagementPage() {
     submitForm.mutate(formData);
   };
 
-  const updateFormData = (stepId: string, data: z.infer<typeof formSchema>) => {
+  const updateFormData = (stepId: string, data: any) => {
     setFormData((prev) => ({
       ...prev,
       [stepId === "personal" ? "personalInfo" : stepId]: data,
